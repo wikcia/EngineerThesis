@@ -1,4 +1,4 @@
-package com.example.engineerthesis
+package com.example.engineerthesis.bluetooth
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -12,10 +12,12 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.google.android.material.snackbar.Snackbar
 import android.Manifest
+import android.util.Log
 import androidx.core.app.ActivityCompat
+import com.example.engineerthesis.R
 
 class SelectDeviceActivity : AppCompatActivity() {
-    private val PERMISSION_REQUEST_CODE = 1234
+    private val PERMISSION_REQUEST_CODE = 123
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,15 +28,22 @@ class SelectDeviceActivity : AppCompatActivity() {
         var pairedDevices : Set<BluetoothDevice> = setOf()
 
 
+        checkPermissions()
         if (ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH) == PackageManager.PERMISSION_GRANTED
-            && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED) {
+            && ContextCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) == PackageManager.PERMISSION_GRANTED
+            && ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
+            && ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
+
             // Tutaj możesz kontynuować i uzyskać dostęp do sparowanych urządzeń Bluetooth
              pairedDevices = bluetoothAdapter.bondedDevices
+
             // Pozostała część kodu
         } else {
             // Poproś użytkownika o uprawnienia Bluetooth i dostępu do lokalizacji
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BLUETOOTH, Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_CODE)
         }
+        //pairedDevices = bluetoothAdapter.bondedDevices
+
         val deviceList = ArrayList<Any>()
         if (pairedDevices.isNotEmpty()) {
             // There are paired devices. Get the name and address of each paired device.
@@ -57,4 +66,28 @@ class SelectDeviceActivity : AppCompatActivity() {
             snackbar.show()
         }
     }
+
+    private fun checkPermissions() {
+        val permissions = arrayOf(
+            Manifest.permission.BLUETOOTH,
+            Manifest.permission.ACCESS_FINE_LOCATION,
+            Manifest.permission.BLUETOOTH_CONNECT,
+            Manifest.permission.BLUETOOTH_SCAN
+        )
+
+        val grantedPermissions = mutableListOf<String>()
+
+        for (permission in permissions) {
+            val result = ContextCompat.checkSelfPermission(this, permission)
+            if (result == PackageManager.PERMISSION_GRANTED) {
+                grantedPermissions.add(permission)
+            }
+        }
+
+        // Możesz wykonać jakieś działania na podstawie przyznanych uprawnień
+        for (permission in grantedPermissions) {
+            Log.d("Granted Permission", permission)
+        }
+    }
+
 }

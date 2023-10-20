@@ -7,28 +7,42 @@
 
     <LinearLayout
         android:id="@+id/linearLayoutDeviceInfo"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
+        android:layout_width="279dp"
+        android:layout_height="54dp"
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/imageViewIcon"
         app:layout_constraintTop_toTopOf="parent">
+
 
         <TextView
             android:id="@+id/textViewDeviceName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="18sp"
-            android:textStyle="bold" />
+            android:textStyle="bold"
+            style="@style/CustomTextStyle"/>
 
         <TextView
             android:id="@+id/textViewDeviceAddress"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"
+            style="@style/CustomTextStyle"/>
     </LinearLayout>
+
+    <ImageView
+        android:id="@+id/imageViewIcon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_marginStart="16dp"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/baseline_broadcast_on_personal_24"
+        app:layout_constraintBottom_toTopOf="@+id/divider"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="@+id/linearLayoutDeviceInfo"
+        app:layout_constraintVertical_bias="0.3" />
 
     <View
         android:id="@+id/divider"

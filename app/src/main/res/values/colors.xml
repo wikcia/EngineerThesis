@@ -4,4 +4,8 @@
     <color name="white">#FFFFFFFF</color>
     <color name="colorOff">#4D484E</color>
     <color name="colorOn">#CDDC39</color>
+    <color name="main">#4815CB</color>
+    <color name="main2">#673AB7</color>
+
+
 </resources>
