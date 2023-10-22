@@ -15,7 +15,6 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import android.view.View
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.TextView
@@ -24,11 +23,12 @@ import androidx.core.content.ContextCompat
 import java.io.IOException
 import java.io.InputStream
 import java.io.OutputStream
-import java.util.Locale
 import java.util.UUID
 import android.Manifest
+import android.annotation.SuppressLint
 import android.app.Activity
-import android.widget.Toast
+import android.view.MotionEvent
+import android.widget.SeekBar
 import com.example.engineerthesis.R
 
 /**
@@ -48,6 +48,7 @@ class MainActivity : AppCompatActivity() {
     private val PERMISSION_REQUEST_CODE = 123
 
 
+    @SuppressLint("ClickableViewAccessibility")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -59,17 +60,33 @@ class MainActivity : AppCompatActivity() {
         val textViewInfo = findViewById<TextView>(R.id.textViewInfo)
         val btnInfo = findViewById<ImageView>(R.id.imageView11)
 
-
         val btnForward = findViewById<ImageView>(R.id.btnForward)
+        val btnForwardImage = R.drawable.triangle
+        val btnForwardImagePressed = R.drawable.t1
         btnForward.isEnabled = false
+
         val btnBack = findViewById<ImageView>(R.id.btnBack)
+        val btnBackImage = R.drawable.triangle2
+        val btnBackImagePressed = R.drawable.t2
         btnBack.isEnabled = false
+
         val btnLeft = findViewById<ImageView>(R.id.btnLeft)
+        val btnLeftImage = R.drawable.triangle3
+        val btnLeftImagePressed = R.drawable.t3
         btnLeft.isEnabled = false
+
         val btnRight = findViewById<ImageView>(R.id.btnRight)
+        val btnRightImage = R.drawable.triangle4
+        val btnRightImagePressed = R.drawable.t4
         btnRight.isEnabled = false
+
         val btnStop = findViewById<ImageView>(R.id.btnStop)
+        val btnStopImage = R.drawable.circle_stop
+        val btnStopImagePressed = R.drawable.c2
         btnStop.isEnabled = false
+
+        val seekBarSpeed = findViewById<SeekBar>(R.id.seekBarSpeed)
+        seekBarSpeed.isEnabled = false
 
         deviceName = intent.getStringExtra("deviceName")
         if (deviceName != null) {
@@ -104,6 +121,8 @@ class MainActivity : AppCompatActivity() {
                                 btnLeft.isEnabled = true
                                 btnRight.isEnabled = true
                                 btnStop.isEnabled = true
+                                seekBarSpeed.isEnabled = true
+
                             }
                             -1 -> {
                                 toolbar.subtitle = "Device fails to connect"
@@ -142,35 +161,56 @@ class MainActivity : AppCompatActivity() {
             startActivity(intent)
         }
 
+
         fun handleButtonAction(command: String) {
             connectedThread.write(command)
         }
 
-        btnForward.setOnClickListener {
-            handleButtonAction("<go forward>")
+        fun setupButton(imageView: ImageView, imagePressed: Int, imageNormal: Int, command: String) {
+            imageView.setOnTouchListener { _, event ->
+                when (event.action) {
+                    MotionEvent.ACTION_DOWN -> {
+                        imageView.setImageResource(imagePressed)
+                    }
+                    MotionEvent.ACTION_UP -> {
+                        imageView.setImageResource(imageNormal)
+                        handleButtonAction(command)
+                    }
+                }
+                true
+            }
         }
+        setupButton(btnForward, btnForwardImagePressed, btnForwardImage,"<go forward>" )
+        setupButton(btnBack, btnBackImagePressed, btnBackImage,"<go back>")
+        setupButton(btnLeft, btnLeftImagePressed, btnLeftImage,"<turn left>")
+        setupButton(btnRight, btnRightImagePressed, btnRightImage,"<turn right>")
+        setupButton(btnStop, btnStopImagePressed, btnStopImage,"<stop>")
 
-        btnBack.setOnClickListener {
-            handleButtonAction("<go back>")
-        }
-
-        btnRight.setOnClickListener {
-            handleButtonAction("<turn right>")
-        }
-
-        btnLeft.setOnClickListener {
-            handleButtonAction("<turn left>")
-        }
-
-        btnStop.setOnClickListener {
-            handleButtonAction("<stop>")
-        }
 
         btnInfo.setOnClickListener {
             // Show a dialog with author information
             showAuthorInfoPopup()
         }
+
+        seekBarSpeed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
+            override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
+                // Tutaj można obsłużyć zmiany prędkości w czasie rzeczywistym
+                val command = "$progress"
+                Log.d("Velocity ", command)
+                connectedThread.write(command)
+            }
+
+            override fun onStartTrackingTouch(seekBar: SeekBar?) {
+                // Wywoływane, gdy użytkownik rozpoczyna przesuwanie suwaka
+            }
+
+            override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                // Wywoływane, gdy użytkownik zakończy przesuwanie suwaka
+            }
+        })
+
     }
+
     private fun showAuthorInfoPopup() {
         val dialogBuilder = AlertDialog.Builder(this)
         val dialogView = layoutInflater.inflate(R.layout.custom_dialog_layout, null)
