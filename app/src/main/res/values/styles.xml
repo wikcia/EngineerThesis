@@ -25,7 +25,7 @@
 
     <style name="CustomButtonStyle">
         <item name="android:textSize">18sp</item>
-        <item name="android:textColor">@color/main</item>
+        <item name="android:textColor">#381479</item>
         <item name="android:fontFamily">@font/ubuntu_bold</item>
     </style>
 
@@ -37,7 +37,14 @@
 
     <style name="CustomSeekBar" parent="Widget.AppCompat.SeekBar">
         <item name="colorControlNormal">@color/black</item>
-        <item name="colorControlActivated">@color/main</item>
+        <item name="colorControlActivated">@color/main2</item>
         <item name="colorControlHighlight">@color/main2</item>
+    </style>
+
+    <style name="CustomTabLayout" parent="Widget.Design.TabLayout">
+        <item name="tabIndicatorColor">@color/white</item> <!-- Kolor paska nawigacji -->
+        <item name="tabIndicatorHeight">4dp</item> <!-- Wysokość paska nawigacji -->
+        <item name="tabPaddingStart">16dp</item> <!-- Wypełnienie początku zakładek -->
+        <item name="tabPaddingEnd">16dp</item> <!-- Wypełnienie końca zakładek -->
     </style>
 </resources>
