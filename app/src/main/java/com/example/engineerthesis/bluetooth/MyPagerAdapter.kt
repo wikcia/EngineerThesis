@@ -8,12 +8,13 @@ class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapt
     override fun getItem(position: Int): Fragment {
         return when (position) {
             0 -> FragmentMain()
-            1 -> FragmentCamera()
+            2 -> FragmentCamera()
+            1 -> FragmentDisplayText()
             else -> FragmentMain()
         }
     }
 
     override fun getCount(): Int {
-        return 2
+        return 3
     }
 }

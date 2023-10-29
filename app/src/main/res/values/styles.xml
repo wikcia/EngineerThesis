@@ -8,7 +8,7 @@
 
     <style name="CustomToolbarTitleText" parent="TextAppearance.AppCompat.Widget.ActionBar.Title">
         <item name="android:textColor">@color/main2</item>
-        <item name="android:textSize">19sp</item>
+        <item name="android:textSize">18sp</item>
         <item name="android:fontFamily">@font/ubuntu_bold</item>
     </style>
 
@@ -46,5 +46,12 @@
         <item name="tabIndicatorHeight">4dp</item> <!-- Wysokość paska nawigacji -->
         <item name="tabPaddingStart">16dp</item> <!-- Wypełnienie początku zakładek -->
         <item name="tabPaddingEnd">16dp</item> <!-- Wypełnienie końca zakładek -->
+    </style>
+
+    <style name="primary">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:fontFamily">@font/ubuntu_bold</item>
+        <item name="android:layout_marginTop">32dp</item>
     </style>
 </resources>

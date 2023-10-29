@@ -48,7 +48,7 @@ class FragmentMain : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val rootView = inflater.inflate(R.layout.fragment_main, container, false)
+        val rootView = inflater.inflate(R.layout.fragment_main2, container, false)
 
         val buttonConnect = rootView.findViewById<ImageView>(R.id.imageView13)
         val toolbar = rootView.findViewById<Toolbar>(R.id.toolbar)
@@ -57,27 +57,27 @@ class FragmentMain : Fragment() {
         val textViewInfo = rootView.findViewById<TextView>(R.id.textViewInfo)
 
         val btnForward = rootView.findViewById<ImageView>(R.id.btnForward)
-        val btnForwardImage = R.drawable.triangle
+        val btnForwardImage = R.drawable.untitled_906
         val btnForwardImagePressed = R.drawable.t1
         btnForward.isEnabled = false
 
         val btnBack = rootView.findViewById<ImageView>(R.id.btnBack)
-        val btnBackImage = R.drawable.triangle2
+        val btnBackImage = R.drawable.untitled_904
         val btnBackImagePressed = R.drawable.t2
         btnBack.isEnabled = false
 
         val btnLeft = rootView.findViewById<ImageView>(R.id.btnLeft)
-        val btnLeftImage = R.drawable.triangle3
+        val btnLeftImage = R.drawable.untitled_902
         val btnLeftImagePressed = R.drawable.t3
         btnLeft.isEnabled = false
 
         val btnRight = rootView.findViewById<ImageView>(R.id.btnRight)
-        val btnRightImage = R.drawable.triangle4
+        val btnRightImage = R.drawable.untitled_901
         val btnRightImagePressed = R.drawable.t4
         btnRight.isEnabled = false
 
         val btnStop = rootView.findViewById<ImageView>(R.id.btnStop)
-        val btnStopImage = R.drawable.circle_stop
+        val btnStopImage = R.drawable.untitled_907
         val btnStopImagePressed = R.drawable.c2
         btnStop.isEnabled = false
 

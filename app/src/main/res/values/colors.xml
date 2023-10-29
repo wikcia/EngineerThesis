@@ -5,8 +5,11 @@
     <color name="colorOff">#4D484E</color>
     <color name="colorOn">#CDDC39</color>
     <color name="main">#4815CB</color>
-    <color name="main2">#360F7C</color>
+    <color name="main3">#ff381e72</color>
+    <color name="main2">#ff6750a4</color>
     <color name="gray">#555359</color>
+    <color name="green">#70c7d2</color>
+
 
 
 </resources>
