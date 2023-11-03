@@ -1,4 +1,4 @@
-package com.example.engineerthesis.bluetooth
+package com.example.engineerthesis.main
 
 import android.content.Context
 import android.content.Intent

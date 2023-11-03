@@ -1,11 +1,10 @@
-package com.example.engineerthesis.bluetooth
+package com.example.engineerthesis.photo
 
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import com.airbnb.lottie.LottieAnimationView
 import android.content.Intent
 import android.widget.Button
 import com.example.engineerthesis.R
@@ -28,7 +27,6 @@ class FragmentCamera : Fragment() {
         return view
     }
 
-    // Metoda wywoływana po kliknięciu przycisku "Make a Photo"
     private fun startPhotoMakingActivity(view: View) {
         val intent = Intent(activity, PhotoMakingActivity::class.java)
         startActivity(intent)

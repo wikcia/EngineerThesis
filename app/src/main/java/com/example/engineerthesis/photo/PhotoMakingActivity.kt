@@ -1,17 +1,10 @@
-package com.example.engineerthesis.bluetooth
+package com.example.engineerthesis.photo
 
 import android.Manifest
-import android.app.Activity
-import android.content.ContentResolver
 import android.content.ContentValues
-import android.content.Intent
 import android.content.pm.PackageManager
-import android.graphics.Color
-import android.graphics.drawable.ColorDrawable
-import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.MediaStore
 import androidx.appcompat.app.AppCompatActivity
 import androidx.camera.core.ImageCapture
@@ -25,10 +18,7 @@ import androidx.camera.core.Preview
 import androidx.camera.core.CameraSelector
 import android.util.Log
 import androidx.camera.core.ImageCaptureException
-import com.example.engineerthesis.databinding.ActivityMainBinding
 import com.example.engineerthesis.databinding.ActivityPhotoMakingBinding
-import java.io.File
-import java.io.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
 
@@ -52,7 +42,8 @@ class PhotoMakingActivity : AppCompatActivity() {
             startCamera()
         } else {
             ActivityCompat.requestPermissions(
-                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS)
+                this, REQUIRED_PERMISSIONS, REQUEST_CODE_PERMISSIONS
+            )
         }
 
         // Set up the listeners for take photo and video capture buttons
@@ -104,8 +95,7 @@ class PhotoMakingActivity : AppCompatActivity() {
                 contentValues)
             .build()
 
-        // Set up image capture listener, which is triggered after photo has
-        // been taken
+        // Set up image capture listener, which is triggered after photo has been taken
         imageCapture.takePicture(
             outputOptions,
             ContextCompat.getMainExecutor(this),

@@ -1,4 +1,4 @@
-package com.example.engineerthesis.bluetooth
+package com.example.engineerthesis.main
 
 import android.bluetooth.BluetoothAdapter
 import android.bluetooth.BluetoothDevice
@@ -34,15 +34,13 @@ class SelectDeviceActivity : AppCompatActivity() {
             && ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_CONNECT) == PackageManager.PERMISSION_GRANTED
             && ContextCompat.checkSelfPermission(this, Manifest.permission.BLUETOOTH_SCAN) == PackageManager.PERMISSION_GRANTED) {
 
-            // Tutaj możesz kontynuować i uzyskać dostęp do sparowanych urządzeń Bluetooth
+            // Here you can continue and access paired Bluetooth devices
              pairedDevices = bluetoothAdapter.bondedDevices
 
-            // Pozostała część kodu
         } else {
-            // Poproś użytkownika o uprawnienia Bluetooth i dostępu do lokalizacji
+            // Ask the user for Bluetooth permissions and location access
             ActivityCompat.requestPermissions(this, arrayOf(Manifest.permission.BLUETOOTH, Manifest.permission.ACCESS_FINE_LOCATION), PERMISSION_REQUEST_CODE)
         }
-        //pairedDevices = bluetoothAdapter.bondedDevices
 
         val deviceList = ArrayList<Any>()
         if (pairedDevices.isNotEmpty()) {
@@ -84,7 +82,7 @@ class SelectDeviceActivity : AppCompatActivity() {
             }
         }
 
-        // Możesz wykonać jakieś działania na podstawie przyznanych uprawnień
+        // You can perform some action based on the powers granted
         for (permission in grantedPermissions) {
             Log.d("Granted Permission", permission)
         }

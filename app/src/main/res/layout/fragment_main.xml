@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
 
     android:background="@drawable/bcg_main"
-    tools:context=".bluetooth.MainActivity">
+    tools:context=".main.MainActivity">
 
     <ProgressBar
         android:id="@+id/progressBar"

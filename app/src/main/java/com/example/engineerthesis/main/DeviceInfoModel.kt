@@ -1,4 +1,4 @@
-package com.example.engineerthesis.bluetooth
+package com.example.engineerthesis.main
 
 class DeviceInfoModel {
     var deviceName: String? = null

@@ -20,6 +20,7 @@ import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
 import android.widget.TextView
+import android.widget.Toast
 import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
@@ -29,6 +30,7 @@ import java.io.InputStream
 import java.io.OutputStream
 import java.util.UUID
 import com.example.engineerthesis.R
+import com.example.engineerthesis.main.SelectDeviceActivity
 
 class FragmentMain : Fragment() {
 
@@ -149,6 +151,7 @@ class FragmentMain : Fragment() {
             startActivity(intent)
         }
 
+
         /* Anonymous function */
         val handleButtonAction: (String) -> Unit = { command ->
             connectedThread.write(command)
@@ -196,6 +199,15 @@ class FragmentMain : Fragment() {
         })
 
         return rootView
+    }
+
+    fun sendTextViaBluetooth(text : String){
+        connectedThread.write(text)
+
+        val context = activity?.applicationContext
+        context?.let {
+            Toast.makeText(it, "Sent text: $text", Toast.LENGTH_SHORT).show()
+        }
     }
 
     private fun showAuthorInfoPopup() {
@@ -290,11 +302,15 @@ class FragmentMain : Fragment() {
                     mmSocket.connect()
                     Log.e("Status", "Device connected")
                     handler.obtainMessage(CONNECTING_STATUS, 1, -1).sendToTarget()
+                    // After a successful connection, set the BluetoothManager flag to true
+                    BluetoothManager.setBluetoothConnected(true)
                 } catch (connectException: IOException) {
                     try {
                         mmSocket.close()
                         Log.e("Status", "Cannot connect to device")
                         handler.obtainMessage(CONNECTING_STATUS, -1, -1).sendToTarget()
+                        // After a failed connection, set the BluetoothManager flag to false
+                        BluetoothManager.setBluetoothConnected(false)
                     } catch (closeException: IOException) {
                         Log.e(TAG, "Could not close the client socket", closeException)
                     }
@@ -319,6 +335,7 @@ class FragmentMain : Fragment() {
         fun cancel() {
             try {
                 mmSocket.close()
+                BluetoothManager.setBluetoothConnected(false)
             } catch (e: IOException) {
                 Log.e(TAG, "Could not close the client socket", e)
             }
