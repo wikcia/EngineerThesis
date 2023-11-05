@@ -13,8 +13,8 @@ class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapt
     override fun getItem(position: Int): Fragment {
         val fragment = when (position) {
             0 -> FragmentMain()
-            2 -> FragmentCamera()
             1 -> FragmentDisplayText()
+            2 -> FragmentCamera()
             else -> FragmentMain()
         }
 

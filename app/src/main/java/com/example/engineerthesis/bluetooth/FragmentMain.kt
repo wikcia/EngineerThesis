@@ -16,6 +16,7 @@ import android.os.Looper
 import android.os.Message
 import android.util.Log
 import android.view.*
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.ProgressBar
 import android.widget.SeekBar
@@ -31,6 +32,7 @@ import java.io.OutputStream
 import java.util.UUID
 import com.example.engineerthesis.R
 import com.example.engineerthesis.main.SelectDeviceActivity
+import com.example.engineerthesis.photo.PhotoMakingActivity
 
 class FragmentMain : Fragment() {
 
@@ -44,6 +46,7 @@ class FragmentMain : Fragment() {
     private val CONNECTING_STATUS = 1
     private val MESSAGE_READ = 2
     private val PERMISSION_REQUEST_CODE = 123
+    private var lastProgress = 0
 
     @SuppressLint("ClickableViewAccessibility")
     override fun onCreateView(
@@ -85,6 +88,8 @@ class FragmentMain : Fragment() {
 
         val seekBarSpeed = rootView.findViewById<SeekBar>(R.id.seekBarSpeed)
         seekBarSpeed.isEnabled = false
+
+
 
         deviceName = activity?.intent?.getStringExtra("deviceName")
         if (deviceName != null) {
@@ -184,31 +189,42 @@ class FragmentMain : Fragment() {
             showAuthorInfoPopup()
         }
 
+
         seekBarSpeed.setOnSeekBarChangeListener(object : SeekBar.OnSeekBarChangeListener {
             override fun onProgressChanged(seekBar: SeekBar?, progress: Int, fromUser: Boolean) {
-                val command = "$progress"
-                Log.d("Velocity ", command)
-                connectedThread.write(command)
+                lastProgress = progress
             }
 
             override fun onStartTrackingTouch(seekBar: SeekBar?) {
             }
 
             override fun onStopTrackingTouch(seekBar: SeekBar?) {
+                val command = "<speed>$lastProgress"
+                Log.d("Velocity", command)
+                connectedThread.write(command)
             }
         })
 
         return rootView
     }
 
-    fun sendTextViaBluetooth(text : String){
-        connectedThread.write(text)
+    fun sendTextViaBluetooth(text: String) {
+        if (text.length <= 16) {
+            val message = "<text>$text"
+            connectedThread.write(message)
 
-        val context = activity?.applicationContext
-        context?.let {
-            Toast.makeText(it, "Sent text: $text", Toast.LENGTH_SHORT).show()
+            val context = activity?.applicationContext
+            context?.let {
+                Toast.makeText(it, "Sent text: $text", Toast.LENGTH_SHORT).show()
+            }
+        } else {
+            val context = activity?.applicationContext
+            context?.let {
+                Toast.makeText(it, "Text is too long", Toast.LENGTH_SHORT).show()
+            }
         }
     }
+
 
     private fun showAuthorInfoPopup() {
         val dialogBuilder = AlertDialog.Builder(requireContext())

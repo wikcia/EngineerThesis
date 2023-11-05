@@ -274,7 +274,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:fontFamily="@font/ubuntu_bold"
-        android:text="Swipe to take a photo"
+        android:text="Swipe to send a text"
         android:textColor="@color/main2"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -282,6 +282,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewInfo"
         app:layout_constraintVertical_bias="0.985" />
+
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
