@@ -32,7 +32,7 @@ import java.io.OutputStream
 import java.util.UUID
 import com.example.engineerthesis.R
 import com.example.engineerthesis.main.SelectDeviceActivity
-import com.example.engineerthesis.photo.PhotoMakingActivity
+import com.example.engineerthesis.photo.CameraActivity
 
 class FragmentMain : Fragment() {
 
@@ -42,6 +42,7 @@ class FragmentMain : Fragment() {
     private lateinit var mmSocket: BluetoothSocket
     private lateinit var connectedThread: ConnectedThread
     private lateinit var createConnectThread: CreateConnectThread
+
 
     private val CONNECTING_STATUS = 1
     private val MESSAGE_READ = 2
@@ -88,6 +89,8 @@ class FragmentMain : Fragment() {
 
         val seekBarSpeed = rootView.findViewById<SeekBar>(R.id.seekBarSpeed)
         seekBarSpeed.isEnabled = false
+
+        val photoButton = rootView.findViewById<ImageView>(R.id.photoButton)
 
 
 
@@ -156,6 +159,10 @@ class FragmentMain : Fragment() {
             startActivity(intent)
         }
 
+        photoButton.setOnClickListener {
+           val intent = Intent(requireContext(), CameraActivity::class.java)
+            startActivity(intent)
+        }
 
         /* Anonymous function */
         val handleButtonAction: (String) -> Unit = { command ->
@@ -205,7 +212,13 @@ class FragmentMain : Fragment() {
             }
         })
 
+
         return rootView
+    }
+    fun reconnectBluetooth() {
+        val bluetoothAdapter = BluetoothAdapter.getDefaultAdapter()
+        createConnectThread = CreateConnectThread(requireActivity(), requireContext(), bluetoothAdapter, deviceAddress)
+        createConnectThread.start()
     }
 
     fun sendTextViaBluetooth(text: String) {

@@ -50,47 +50,18 @@ class FragmentDisplayText : Fragment() {
 
         return view
     }
+    override fun onResume() {
+        super.onResume()
+        val fragmentMain = requireActivity().supportFragmentManager.findFragmentByTag("Fragment_0") as? FragmentMain
+        // Check Bluetooth connection status
+        if (BluetoothManager.getBluetoothConnected()) {
+            // If you are not connected, try to establish a connection
+            fragmentMain?.reconnectBluetooth()
+            val context = activity?.applicationContext
+            context?.let {
+                Toast.makeText(it, "Reconnected to bluetooth device", Toast.LENGTH_SHORT).show()
+            }
+        }
+    }
 }
 
-
-//class FragmentDisplayText : Fragment() {
-//    private var textSendListener: TextSendListener? = null
-//
-//    override fun onCreateView(
-//        inflater: LayoutInflater, container: ViewGroup?,
-//        savedInstanceState: Bundle?
-//    ): View? {
-//        val view = inflater.inflate(R.layout.fragment_display_text, container, false)
-//        val sendTextView = view.findViewById<EditText>(R.id.messageEditText)
-//        val sendButton = view.findViewById<Button>(R.id.sendTextButton)
-//        val imageView = view.findViewById<ImageView>(R.id.imageView)
-//
-//        sendButton.setOnClickListener {
-//            if (BluetoothManager.getBluetoothConnected()) {
-//                val textToSend = sendTextView.text.toString()
-//                textSendListener?.onTextSend(textToSend)
-//            } else {
-//                Toast.makeText(context, "No Bluetooth connection to the robot", Toast.LENGTH_SHORT).show()
-//            }
-//        }
-//
-//        imageView.setOnClickListener {
-//            // Wyświetl AlertDialog po kliknięciu ImageView
-//            val alertDialog = AlertDialog.Builder(requireContext())
-//            val dialogView = layoutInflater.inflate(R.layout.fragment_camera, null)
-//            alertDialog.setView(dialogView)
-//
-//            val openNewActivityButton = dialogView.findViewById<Button>(R.id.sendTextButton)
-//            openNewActivityButton.setOnClickListener {
-//                // Kliknięto przycisk, więc otwórz nową aktywność
-//                val intent = Intent(context, PhotoMakingActivity::class.java)
-//                startActivity(intent)
-//            }
-//
-//            alertDialog.create().show()
-//        }
-//
-//
-//        return view
-//    }
-//}

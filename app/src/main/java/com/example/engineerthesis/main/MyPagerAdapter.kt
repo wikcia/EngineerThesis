@@ -6,7 +6,6 @@ import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
 import com.example.engineerthesis.bluetooth.FragmentDisplayText
 import com.example.engineerthesis.bluetooth.FragmentMain
-import com.example.engineerthesis.photo.FragmentCamera
 
 
 class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapter(fragmentManager) {
@@ -14,7 +13,7 @@ class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapt
         val fragment = when (position) {
             0 -> FragmentMain()
             1 -> FragmentDisplayText()
-            2 -> FragmentCamera()
+            //2 -> FragmentCamera()
             else -> FragmentMain()
         }
 
@@ -26,6 +25,7 @@ class MyPagerAdapter(fragmentManager: FragmentManager) : FragmentStatePagerAdapt
     }
 
     override fun getCount(): Int {
-        return 3
+        return 2
+
     }
 }

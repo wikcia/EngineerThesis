@@ -37,7 +37,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewInfo"
         app:layout_constraintVertical_bias="0.721"
-        app:srcCompat="@drawable/_23" />
+        app:srcCompat="@drawable/_25" />
 
     <TextView
         android:id="@+id/textView4"
@@ -257,14 +257,14 @@
 
     <com.airbnb.lottie.LottieAnimationView
         android:id="@+id/swipe"
-        android:layout_width="158dp"
-        android:layout_height="142dp"
+        android:layout_width="156dp"
+        android:layout_height="133dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.975"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.998"
+        app:layout_constraintVertical_bias="1.0"
         app:lottie_autoPlay="true"
         app:lottie_loop="true"
         app:lottie_rawRes="@raw/arrow" />
@@ -283,6 +283,29 @@
         app:layout_constraintTop_toBottomOf="@+id/textViewInfo"
         app:layout_constraintVertical_bias="0.985" />
 
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="67dp"
+        android:layout_height="67dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toStartOf="@+id/swipe"
+        app:layout_constraintHorizontal_bias="0.037"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/seekBarSpeed"
+        app:layout_constraintVertical_bias="0.535"
+        app:srcCompat="@drawable/cc" />
+
+    <ImageView
+        android:id="@+id/photoButton"
+        android:layout_width="60dp"
+        android:layout_height="55dp"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView2"
+        app:layout_constraintEnd_toEndOf="@+id/imageView2"
+        app:layout_constraintHorizontal_bias="0.07"
+        app:layout_constraintStart_toStartOf="@+id/imageView2"
+        app:layout_constraintTop_toTopOf="@+id/imageView2"
+        app:layout_constraintVertical_bias="0.2"
+        app:srcCompat="@drawable/baseline_add_a_photo_24" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
